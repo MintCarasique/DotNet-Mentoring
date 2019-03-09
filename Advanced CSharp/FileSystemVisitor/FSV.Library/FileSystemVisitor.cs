@@ -11,9 +11,10 @@ namespace FSV.Library
     {
         public IEnumerable<string> PerformProcess(string startPath)
         {
-            string[] entries = Directory.GetFileSystemEntries(startPath);
+            string[] entries = Directory.GetFileSystemEntries(startPath, "*", SearchOption.AllDirectories);
 
             return entries;
         }
+        
     }
 }
