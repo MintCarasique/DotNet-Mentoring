@@ -16,12 +16,13 @@ namespace FSV.Console
             var fileProc = new FileSystemVisitor();
 
             fileProc.Start += (object sender, EventArgs e) => System.Console.WriteLine("Process started");
+            fileProc.FileFound += (object sender, VisitorEventArgs e) => System.Console.WriteLine($"File found: {e.EntryName}");
+            fileProc.DirectoryFound += (object sender, VisitorEventArgs e) => System.Console.WriteLine($"Directory found: {e.EntryName}");
 
-            var fileEntries = fileProc.PerformProcess(testPath);
-            
-            foreach(var entry in fileEntries)
+
+            foreach (var entry in fileProc.PerformProcess(testPath))
             {
-                System.Console.WriteLine(entry);
+               // System.Console.WriteLine(entry);
             }
         }
     }

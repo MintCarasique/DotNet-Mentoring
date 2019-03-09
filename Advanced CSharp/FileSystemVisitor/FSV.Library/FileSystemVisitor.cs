@@ -32,12 +32,30 @@ namespace FSV.Library
             foreach(var entry in entries)
             {
                 var fileName = Path.GetFileName(entry);
+                ProcessAction action;
+
                 if (Directory.Exists(entry))
                 {
-                    OnEvent(DirectoryFound, new VisitorEventArgs(entry));
+                    action = EntryProcess(entry, fileName, DirectoryFound);
                 }
+                else
+                {
+                    action = EntryProcess(entry, fileName, FileFound);
+                }
+                yield return entry;
             }
-            return null;
+        }
+
+        private ProcessAction EntryProcess(
+            string entry, 
+            string entryName, 
+            EventHandler<VisitorEventArgs> foundHandler)
+        {
+            VisitorEventArgs e = new VisitorEventArgs(entryName);
+
+            OnEvent(foundHandler, e);
+
+            return e.Action;
         }
 
         protected virtual void OnEvent<T>(EventHandler<T> eventHandler, T eventArgs)
