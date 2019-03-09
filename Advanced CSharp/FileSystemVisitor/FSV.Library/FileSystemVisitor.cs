@@ -9,9 +9,23 @@ namespace FSV.Library
 {
     public class FileSystemVisitor
     {
+        private readonly Func<string, bool> _filter;
+
         public event EventHandler<EventArgs> Start, Finish;
 
         public event EventHandler<VisitorEventArgs> FileFound, DirectoryFound, FilteredFileFound, FilteredDirectoryFound;
+
+        public FileSystemVisitor(Func<string, bool> filter = null)
+        {
+            if (filter != null)
+            {
+                _filter = filter;
+            }
+            else
+            {
+                _filter = (string path) => false;
+            }
+        }
 
         public IEnumerable<string> PerformProcess(string startPath)
         {
@@ -36,11 +50,11 @@ namespace FSV.Library
 
                 if (Directory.Exists(entry))
                 {
-                    action = EntryProcess(entry, fileName, DirectoryFound);
+                    action = EntryProcess(entry, fileName, DirectoryFound, FilteredDirectoryFound);
                 }
                 else
                 {
-                    action = EntryProcess(entry, fileName, FileFound);
+                    action = EntryProcess(entry, fileName, FileFound, FilteredFileFound);
                 }
                 yield return entry;
             }
@@ -49,11 +63,18 @@ namespace FSV.Library
         private ProcessAction EntryProcess(
             string entry, 
             string entryName, 
-            EventHandler<VisitorEventArgs> foundHandler)
+            EventHandler<VisitorEventArgs> foundHandler,
+            EventHandler<VisitorEventArgs> filterHandler)
         {
             VisitorEventArgs e = new VisitorEventArgs(entryName);
 
             OnEvent(foundHandler, e);
+
+            if (!_filter(entry))
+            {
+                this.OnEvent(filterHandler, e);
+                return e.Action;
+            }
 
             return e.Action;
         }

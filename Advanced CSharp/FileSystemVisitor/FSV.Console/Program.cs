@@ -18,6 +18,13 @@ namespace FSV.Console
             fileProc.Start += (object sender, EventArgs e) => System.Console.WriteLine("Process started");
             fileProc.FileFound += (object sender, VisitorEventArgs e) => System.Console.WriteLine($"File found: {e.EntryName}");
             fileProc.DirectoryFound += (object sender, VisitorEventArgs e) => System.Console.WriteLine($"Directory found: {e.EntryName}");
+            fileProc.FilteredDirectoryFound += (object sender, VisitorEventArgs e) =>
+            {
+                if (e.EntryName == "bin")
+                {
+                    System.Console.WriteLine("Bin directory found!");
+                }
+            };
 
 
             foreach (var entry in fileProc.PerformProcess(testPath))
