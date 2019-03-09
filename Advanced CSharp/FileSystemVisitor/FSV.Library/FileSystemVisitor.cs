@@ -15,11 +15,27 @@ namespace FSV.Library
         {
             OnEvent(Start, new EventArgs());
 
-            string[] entries = Directory.GetFileSystemEntries(startPath, "*", SearchOption.AllDirectories);            
+            string[] entries = Directory.GetFileSystemEntries(startPath, "*", SearchOption.AllDirectories);
+
+            foreach (string entry in this.EntriesProcessor(entries))
+            {
+                yield return entry;
+            }
 
             OnEvent(Finish, new EventArgs());
+        }
 
-            return entries;
+        private IEnumerable<string> EntriesProcessor(string[] entries)
+        {
+            foreach(var entry in entries)
+            {
+                var fileName = Path.GetFileName(entry);
+                if (Directory.Exists(entry))
+                {
+                    
+                }
+            }
+            return null;
         }
 
         protected virtual void OnEvent<T>(EventHandler<T> eventHandler, T eventArgs)
