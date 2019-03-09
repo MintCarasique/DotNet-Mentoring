@@ -56,7 +56,15 @@ namespace FSV.Library
                 {
                     action = EntryProcess(entry, fileName, FileFound, FilteredFileFound);
                 }
-                yield return entry;
+
+                if (action == ProcessAction.Interrupt)
+                {
+                    yield break;
+                }
+                else if (action == ProcessAction.Continue)
+                {
+                    yield return entry;
+                }
             }
         }
 
@@ -70,13 +78,18 @@ namespace FSV.Library
 
             OnEvent(foundHandler, e);
 
+            if (e.Action != ProcessAction.Continue)
+            {
+                return e.Action;
+            }
+
             if (!_filter(entry))
             {
                 this.OnEvent(filterHandler, e);
                 return e.Action;
             }
 
-            return e.Action;
+            return ProcessAction.Exclude;
         }
 
         protected virtual void OnEvent<T>(EventHandler<T> eventHandler, T eventArgs)
