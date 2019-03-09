@@ -6,7 +6,7 @@ namespace HelloWorldStandard
     {
         public string ReturnHelloMessage(string name)
         {
-            return $"Hello, {name}";
+            return $"{DateTime.Now} Hello, {name}";
         }
     }
 }
