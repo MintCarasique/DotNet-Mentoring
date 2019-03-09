@@ -15,6 +15,8 @@ namespace FSV.Console
         {
             var fileProc = new FileSystemVisitor();
 
+            fileProc.Start += (object sender, EventArgs e) => System.Console.WriteLine("Process started");
+
             var fileEntries = fileProc.PerformProcess(testPath);
             
             foreach(var entry in fileEntries)

@@ -11,6 +11,8 @@ namespace FSV.Library
     {
         public event EventHandler<EventArgs> Start, Finish;
 
+        public event EventHandler<VisitorEventArgs> FileFound, DirectoryFound, FilteredFileFound, FilteredDirectoryFound;
+
         public IEnumerable<string> PerformProcess(string startPath)
         {
             OnEvent(Start, new EventArgs());
@@ -32,7 +34,7 @@ namespace FSV.Library
                 var fileName = Path.GetFileName(entry);
                 if (Directory.Exists(entry))
                 {
-                    
+                    OnEvent(DirectoryFound, new VisitorEventArgs(entry));
                 }
             }
             return null;
