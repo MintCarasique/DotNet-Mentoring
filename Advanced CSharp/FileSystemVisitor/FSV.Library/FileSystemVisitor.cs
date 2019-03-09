@@ -9,12 +9,22 @@ namespace FSV.Library
 {
     public class FileSystemVisitor
     {
+        public event EventHandler<EventArgs> Start, Finish;
+
         public IEnumerable<string> PerformProcess(string startPath)
         {
-            string[] entries = Directory.GetFileSystemEntries(startPath, "*", SearchOption.AllDirectories);
+            OnEvent(Start, new EventArgs());
+
+            string[] entries = Directory.GetFileSystemEntries(startPath, "*", SearchOption.AllDirectories);            
+
+            OnEvent(Finish, new EventArgs());
 
             return entries;
         }
-        
+
+        protected virtual void OnEvent<T>(EventHandler<T> eventHandler, T eventArgs)
+        {
+            eventHandler?.Invoke(this, eventArgs);
+        }
     }
 }
