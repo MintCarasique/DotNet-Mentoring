@@ -16,7 +16,7 @@ public partial class MainWindow
 		global::Stetic.Gui.Initialize(this);
 		// Widget MainWindow
 		this.Name = "MainWindow";
-		this.Title = global::Mono.Unix.Catalog.GetString("MainWindow");
+		this.Title = "HelloWorld";
 		this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 		// Container child MainWindow.Gtk.Container+ContainerChild
 		this.vbox1 = new global::Gtk.VBox();
@@ -39,7 +39,7 @@ public partial class MainWindow
 		this.applyButton.CanFocus = true;
 		this.applyButton.Name = "applyButton";
 		this.applyButton.UseUnderline = true;
-		this.applyButton.Label = global::Mono.Unix.Catalog.GetString("Apply");
+		this.applyButton.Label = "Apply";
 		this.vbox1.Add(this.applyButton);
 		global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.applyButton]));
 		w2.Position = 1;

@@ -51,7 +51,6 @@
       <Package>gtk-sharp-2.0</Package>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Mono.Posix" />
     <Reference Include="HelloWorldStandard">
       <HintPath>..\..\HelloWorldStandard\HelloWorldStandard\bin\Debug\netstandard2.0\HelloWorldStandard.dll</HintPath>
     </Reference>
