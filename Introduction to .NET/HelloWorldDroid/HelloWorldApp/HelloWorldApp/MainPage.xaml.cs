@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using HelloWorldStandard;
 
 namespace HelloWorldApp
 {
@@ -11,8 +12,11 @@ namespace HelloWorldApp
     {
         Label textLabel;
         Entry nameEntry;
+
+        private HelloWorld hello;
         public MainPage()
         {
+            hello = new HelloWorld();
             StackLayout stackLayout = new StackLayout();
 
             nameEntry = new Entry { Placeholder = "Login" };
@@ -30,7 +34,7 @@ namespace HelloWorldApp
         {
             if(nameEntry.Text.Length > 0)
             {
-                textLabel.Text = $"Hello, {nameEntry.Text}!";
+                textLabel.Text = hello.ReturnHelloMessage(nameEntry.Text);
             }
             else
             {

@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using HelloWorldStandard;
 
 namespace HelloWorldForms
 {
@@ -21,7 +15,9 @@ namespace HelloWorldForms
         {
             var name = inputTextBox.Text;
 
-            resultTextBox.Text = $"Hello, {name}!";
+            var hello = new HelloWorld();
+
+            resultTextBox.Text = hello.ReturnHelloMessage(name);
         }
     }
 }

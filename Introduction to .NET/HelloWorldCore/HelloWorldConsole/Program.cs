@@ -1,4 +1,5 @@
 ﻿using System;
+using HelloWorldStandard;
 
 namespace HelloWorldConsole
 {
@@ -7,7 +8,8 @@ namespace HelloWorldConsole
         static void Main(string[] args)
         {
             var userName = Console.ReadLine();
-            Console.WriteLine($"Hello {userName}!");
+            var hello = new HelloWorld();
+            Console.WriteLine(hello.ReturnHelloMessage(userName));
         }
     }
 }
