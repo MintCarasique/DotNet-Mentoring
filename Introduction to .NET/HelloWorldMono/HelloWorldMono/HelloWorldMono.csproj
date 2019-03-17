@@ -54,6 +54,7 @@
     <Reference Include="HelloWorldStandard">
       <HintPath>..\..\HelloWorldStandard\HelloWorldStandard\bin\Debug\netstandard2.0\HelloWorldStandard.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Posix" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
