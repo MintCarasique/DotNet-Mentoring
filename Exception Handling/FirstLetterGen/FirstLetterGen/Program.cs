@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FirstLetterGen.Library;
 
 namespace FirstLetterGen
 {
@@ -10,6 +11,11 @@ namespace FirstLetterGen
     {
         static void Main(string[] args)
         {
+            while (true)
+            {
+                var input = Console.ReadLine();
+                Console.WriteLine(FirstLetterGen.Library.FirstLetterGen.ReturnFirstLetter(input));
+            }            
         }
     }
 }
