@@ -11,9 +11,27 @@ namespace DigitConverterClass
         public static int ConvertToInt(string inputNumber)
         {
             int resultNumber = 0;
-            for (int i = 0; i < inputNumber.Length; i++)
+            bool isNegative = false;
+            int startPoint = 0;
+
+            if(inputNumber[0] == '-')
             {
-                resultNumber = resultNumber * 10 + ConvertCharToInt(inputNumber[i]);
+                isNegative = true;
+                startPoint = 1;
+            }
+
+            if (inputNumber[0] == '+')
+            {
+                startPoint = 1;
+            }
+
+            for (int i = startPoint; i < inputNumber.Length; i++)
+            {
+                resultNumber = resultNumber * 10 + ConvertCharToInt(inputNumber[i]);                
+            }
+            if (isNegative)
+            {
+                resultNumber = -resultNumber;
             }
 
             return resultNumber;
