@@ -34,7 +34,7 @@ namespace DigitConverterClass
             {
                 if (IsDigit(inputNumber[i]))
                 {
-                    resultNumber = resultNumber * 10 + ConvertCharToInt(inputNumber[i]);
+                    resultNumber = checked(resultNumber * 10 + ConvertCharToInt(inputNumber[i]));
                 }
                 
             }
