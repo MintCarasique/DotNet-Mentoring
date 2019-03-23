@@ -10,6 +10,11 @@ namespace DigitConverterClass
     {
         public static int ConvertToInt(string inputNumber)
         {
+            if (string.IsNullOrEmpty(inputNumber))
+            {
+                ArgumentNullException ex = new ArgumentNullException($"{nameof(inputNumber)} is null or empty");
+                throw ex;
+            }
             int resultNumber = 0;
             bool isNegative = false;
             int startPoint = 0;
@@ -27,7 +32,11 @@ namespace DigitConverterClass
 
             for (int i = startPoint; i < inputNumber.Length; i++)
             {
-                resultNumber = resultNumber * 10 + ConvertCharToInt(inputNumber[i]);                
+                if (IsDigit(inputNumber[i]))
+                {
+                    resultNumber = resultNumber * 10 + ConvertCharToInt(inputNumber[i]);
+                }
+                
             }
             if (isNegative)
             {
@@ -40,6 +49,15 @@ namespace DigitConverterClass
         private static int ConvertCharToInt(char digit)
         {
             return digit - '0';
+        }
+
+        private static bool IsDigit(char digit)
+        {
+            if(digit < '0' || digit > '9')
+            {
+                throw new ArithmeticException("Provided char is not a digit");
+            }
+            return true;
         }
     }
 }
