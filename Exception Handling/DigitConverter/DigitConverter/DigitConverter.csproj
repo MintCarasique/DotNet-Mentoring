@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DigitConverterClass\DigitConverterClass.csproj">
+      <Project>{a0ba99a8-04ef-4fbf-8e4b-58ddaa881fed}</Project>
+      <Name>DigitConverterClass</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
