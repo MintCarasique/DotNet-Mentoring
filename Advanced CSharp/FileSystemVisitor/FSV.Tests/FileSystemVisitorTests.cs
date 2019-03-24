@@ -1,22 +1,31 @@
 using System;
 using System.Collections.Generic;
+using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
-using NUnit.Framework;
 using FSV.Library;
+using NUnit.Framework;
 
-namespace FileSystemVisitorTests
+namespace FSV.Tests
 {
     [TestFixture]
     public class FileSystemVisitorTests
     {
         private string _baseDirectory;
         private FileSystemVisitor _visitor;
+        private MockFileSystem _mockFileSystem;
 
         [SetUp]
         public void Initialize()
         {
+            _mockFileSystem = new MockFileSystem();
+            _mockFileSystem.AddDirectory(@"D:\FakeDirectory\");
+            _mockFileSystem.AddDirectory(@"D:\FakeDirectory\FakeDirectoryWithFile");
+            _mockFileSystem.AddDirectory(@"D:\FakeDirectory\FakeDirectoryWithoutFile");
+            _mockFileSystem.AddFile(@"D:\FakeDirectory\FakeDirectoryWithFile\file.txt", MockFileData.NullObject);
+
             _baseDirectory = @"D:\\FakeDirectory\";
-            _visitor = new FileSystemVisitor();
+
+            _visitor = new FileSystemVisitor(_mockFileSystem);
         }
 
         [Test]

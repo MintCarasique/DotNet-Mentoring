@@ -10,7 +10,7 @@ namespace FSV.Library
     {
         private readonly IFileSystem _fileSystem;
 
-        private readonly Func<string, bool> _filter;
+        private Func<string, bool> _filter;
 
         public event EventHandler<EventArgs> Start, Finish;
 
@@ -20,19 +20,13 @@ namespace FSV.Library
         public FileSystemVisitor(Func<string, bool> filter = null)
         {
             _fileSystem = new FileSystem();
-            if (filter != null)
-            {
-                _filter = filter;
-            }
-            else
-            {
-                _filter = (string path) => false;
-            }
+            InitializeFilter(filter);
         }
 
-        internal FileSystemVisitor(IFileSystem fileSystem, Func<string, bool> filter = null)
+        public FileSystemVisitor(IFileSystem fileSystem, Func<string, bool> filter = null)
         {
             _fileSystem = fileSystem;
+            InitializeFilter(filter);
         }
 
         public IEnumerable<string> PerformProcess(string startPath)
@@ -69,7 +63,8 @@ namespace FSV.Library
                 {
                     yield break;
                 }
-                else if (action == ProcessAction.Continue)
+
+                if (action == ProcessAction.Continue)
                 {
                     yield return entry;
                 }
@@ -98,6 +93,18 @@ namespace FSV.Library
             }
 
             return ProcessAction.Exclude;
+        }
+
+        private void InitializeFilter(Func<string, bool> filter)
+        {
+            if (filter != null)
+            {
+                _filter = filter;
+            }
+            else
+            {
+                _filter = (string path) => false;
+            }
         }
 
         protected virtual void OnEvent<T>(EventHandler<T> eventHandler, T eventArgs)
