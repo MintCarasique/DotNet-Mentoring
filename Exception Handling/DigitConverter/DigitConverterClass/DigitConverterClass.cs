@@ -36,7 +36,6 @@ namespace DigitConverterClass
                 {
                     resultNumber = checked(resultNumber * 10 + ConvertCharToInt(inputNumber[i]));
                 }
-                
             }
             if (isNegative)
             {
