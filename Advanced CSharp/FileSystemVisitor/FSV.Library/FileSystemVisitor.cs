@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Abstractions;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FSV.Library
 {
     public class FileSystemVisitor
     {
+        private readonly IFileSystem _fileSystem;
+
         private readonly Func<string, bool> _filter;
 
         public event EventHandler<EventArgs> Start, Finish;
 
         public event EventHandler<VisitorEventArgs> FileFound, DirectoryFound, FilteredFileFound, FilteredDirectoryFound;
 
+
         public FileSystemVisitor(Func<string, bool> filter = null)
         {
+            _fileSystem = new FileSystem();
             if (filter != null)
             {
                 _filter = filter;
@@ -27,11 +30,16 @@ namespace FSV.Library
             }
         }
 
+        internal FileSystemVisitor(IFileSystem fileSystem, Func<string, bool> filter = null)
+        {
+            _fileSystem = fileSystem;
+        }
+
         public IEnumerable<string> PerformProcess(string startPath)
         {
             OnEvent(Start, new EventArgs());
 
-            string[] entries = Directory.GetFileSystemEntries(startPath, "*", SearchOption.AllDirectories);
+            string[] entries = _fileSystem.Directory.EnumerateFileSystemEntries(startPath, "*", SearchOption.AllDirectories).ToArray();
 
             foreach (string entry in this.EntriesProcessor(entries))
             {
@@ -48,7 +56,7 @@ namespace FSV.Library
                 var fileName = Path.GetFileName(entry);
                 ProcessAction action;
 
-                if (Directory.Exists(entry))
+                if (_fileSystem.Directory.Exists(entry))
                 {
                     action = EntryProcess(entry, fileName, DirectoryFound, FilteredDirectoryFound);
                 }
