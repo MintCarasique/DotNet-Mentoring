@@ -133,10 +133,24 @@ namespace FSV.Tests
             _visitor.Start += (object sender, EventArgs e) => wasStartCalled = true;
             _visitor.Finish += (object sender, EventArgs e) => wasFinishCalled = true;
 
-
+            // Act.
             void FsvPerform() => _visitor.PerformProcess(null).ToList();
 
+            // Assert.
             Assert.Throws<ArgumentNullException>(FsvPerform);
+        }
+
+        [Test]
+        public void VisitDirectory_WhenNullFileSystemPassed_ThrowNullReferenceException()
+        {
+            // Arrange.
+            var nullVisitor = new FileSystemVisitor(null, null);
+
+            // Act.
+            void FsvPerform() => nullVisitor.PerformProcess(_baseDirectory).ToList();
+
+            // Assert.
+            Assert.Throws<NullReferenceException>(FsvPerform);
         }
     }
 }
