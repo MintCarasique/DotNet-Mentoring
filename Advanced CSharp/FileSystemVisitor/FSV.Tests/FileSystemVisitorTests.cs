@@ -33,11 +33,11 @@ namespace FSV.Tests
         {
             // Arrange.
             bool wasStartCalled = false, wasFinishCalled = false;
-            _visitor.Start += (object sender, EventArgs e) => wasStartCalled = true;
-            _visitor.Finish += (object sender, EventArgs e) => wasFinishCalled = true;
+            _visitor.Start += (sender, e) => wasStartCalled = true;
+            _visitor.Finish += (sender, e) => wasFinishCalled = true;
 
             // Act.
-            _visitor.PerformProcess(_baseDirectory).ToList();
+            var list = _visitor.PerformProcess(_baseDirectory).ToList();
 
             // Assert.
             Assert.IsTrue(wasStartCalled);
@@ -49,9 +49,9 @@ namespace FSV.Tests
         {
             // Arrange.
             bool wasDirectoryFindedCalled = false, wasFilteredDirectoryFindedCalled = false;
-            _visitor.DirectoryFound += (object sender, VisitorEventArgs e) =>
+            _visitor.DirectoryFound += (sender, e) =>
                 wasDirectoryFindedCalled = true;
-            _visitor.FilteredDirectoryFound += (object sender, VisitorEventArgs e) =>
+            _visitor.FilteredDirectoryFound += (sender, e) =>
                 wasFilteredDirectoryFindedCalled = true;
 
             // Act.
@@ -122,7 +122,21 @@ namespace FSV.Tests
 
             // Assert.
             // Only 'FakeDirectoryWithFile' was found, then search was stopped.
-            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [Test]
+        public void VisitDirectory_WhenNullStartPathPassed_ThrowArgumentNullException()
+        {
+            // Arrange.
+            bool wasStartCalled = false, wasFinishCalled = false;
+            _visitor.Start += (object sender, EventArgs e) => wasStartCalled = true;
+            _visitor.Finish += (object sender, EventArgs e) => wasFinishCalled = true;
+
+
+            void FsvPerform() => _visitor.PerformProcess(null).ToList();
+
+            Assert.Throws<ArgumentNullException>(FsvPerform);
         }
     }
 }
