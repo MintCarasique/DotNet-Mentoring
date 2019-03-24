@@ -35,7 +35,7 @@ namespace FSV.Library
 
             string[] entries = _fileSystem.Directory.EnumerateFileSystemEntries(startPath, "*", SearchOption.AllDirectories).ToArray();
 
-            foreach (string entry in this.EntriesProcessor(entries))
+            foreach (string entry in EntriesProcessor(entries))
             {
                 yield return entry;
             }
@@ -88,7 +88,7 @@ namespace FSV.Library
 
             if (!_filter(entry))
             {
-                this.OnEvent(filterHandler, e);
+                OnEvent(filterHandler, e);
                 return e.Action;
             }
 
@@ -103,7 +103,7 @@ namespace FSV.Library
             }
             else
             {
-                _filter = (string path) => false;
+                _filter = path => false;
             }
         }
 
