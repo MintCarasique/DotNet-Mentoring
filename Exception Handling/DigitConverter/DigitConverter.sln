@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitConverter", "DigitConv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitConverterClass", "DigitConverterClass\DigitConverterClass.csproj", "{A0BA99A8-04EF-4FBF-8E4B-58DDAA881FED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitConverter.Tests", "DigitConverter.Tests\DigitConverter.Tests.csproj", "{5EC4618F-4545-4B41-8190-5CA8CFF82C48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A0BA99A8-04EF-4FBF-8E4B-58DDAA881FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0BA99A8-04EF-4FBF-8E4B-58DDAA881FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0BA99A8-04EF-4FBF-8E4B-58DDAA881FED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EC4618F-4545-4B41-8190-5CA8CFF82C48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EC4618F-4545-4B41-8190-5CA8CFF82C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EC4618F-4545-4B41-8190-5CA8CFF82C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EC4618F-4545-4B41-8190-5CA8CFF82C48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
