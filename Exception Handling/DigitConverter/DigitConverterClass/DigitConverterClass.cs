@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DigitConverterClass.Exceptions;
 
 namespace DigitConverterClass
 {
@@ -54,7 +55,7 @@ namespace DigitConverterClass
         {
             if(digit < '0' || digit > '9')
             {
-                throw new ArithmeticException("Provided char is not a digit");
+                throw new NotADigitException("Provided char is not a digit");
             }
             return true;
         }

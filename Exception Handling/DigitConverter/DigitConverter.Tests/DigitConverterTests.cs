@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using DigitConverterClass;
+using DigitConverterClass.Exceptions;
 
 namespace DigitConverter.Tests
 {
@@ -48,7 +49,7 @@ namespace DigitConverter.Tests
             void ConvertNumber() => actualNumber = DigitConverterClass.DigitConverterClass.ConvertToInt(inputNumber);
 
             // Assert.
-            Assert.Throws<ArithmeticException>(ConvertNumber);
+            Assert.Throws<NotADigitException>(ConvertNumber);
         }
 
         [TestCase("")]
