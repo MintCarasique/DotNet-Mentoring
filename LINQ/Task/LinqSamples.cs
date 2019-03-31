@@ -139,6 +139,22 @@ namespace SampleQueries
                     $@"Customer ID: {customer.CustomerID}, Year: {customer.FirstDate.Year}, Month: {customer.FirstDate.Month}, Sum: {customer.TotalSum}");
             }
         }
+
+        [Category("Tasks")]
+        [Title("Task 6")]
+        [Description("All customers who have a non-digital postal code, or not filled region or the phone does not contain the operator code")]
+        public void Linq6()
+        {
+            var customers = dataSource.Customers.Where(_ =>
+                !int.TryParse(_.PostalCode, out var postal)
+                || string.IsNullOrEmpty(_.Region)
+                || !_.Phone.StartsWith("(")
+            );
+            foreach (var customer in customers)
+            {
+                ObjectDumper.Write($"ID: {customer.CustomerID}, Postal: {customer.PostalCode}, Region: {customer.Region}, Phone: {customer.Phone}");
+            }
+        }
     }
 }
 
