@@ -53,17 +53,17 @@ namespace SampleQueries
                 dataSource.Suppliers,
                 c => new { c.City, c.Country },
                 s => new { s.City, s.Country },
-                (_customer, _suppliers) => new
+                (customer, suppliers) => new
                 {
-                    _customer.CustomerID,
-                    _customer.City,
-                    _customer.Country,
-                    Suppliers = _suppliers.Select(_s => new { _s.SupplierName, _s.City, _s.Country })
+                    customer.CustomerID,
+                    customer.City,
+                    customer.Country,
+                    Suppliers = suppliers.Select(s => new { s.SupplierName, s.City, s.Country })
                 });
             foreach (var customer in customersAndSuppliers)
             {
                ObjectDumper.Write(customer, 2);
-               Console.WriteLine("---------------------------------------------------------");
+               Console.WriteLine(@"---------------------------------------------------------");
             }
         }
     }
