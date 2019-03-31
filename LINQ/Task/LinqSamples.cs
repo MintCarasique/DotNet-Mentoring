@@ -66,6 +66,21 @@ namespace SampleQueries
                Console.WriteLine(@"---------------------------------------------------------");
             }
         }
+
+        [Category("Tasks")]
+        [Title("Task 3")]
+        [Description("List of all customers who had orders that exceed the sum of X")]
+        public void Linq3()
+        {
+            var x = 12000;
+            var customers = dataSource.Customers.Where(_ => _.Orders.Any(t => t.Total >= x));
+
+            foreach (var customer in customers)
+            {
+                ObjectDumper.Write(customer, 2);
+                Console.WriteLine(@"---------------------------------------------------------");
+            }
+        }
     }
 }
 
