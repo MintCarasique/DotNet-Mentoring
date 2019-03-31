@@ -62,8 +62,33 @@ namespace SampleQueries
                 });
             foreach (var customer in customersAndSuppliers)
             {
-               ObjectDumper.Write(customer, 2);
-               Console.WriteLine(@"---------------------------------------------------------");
+                ObjectDumper.Write(customer, 2);
+                Console.WriteLine(@"---------------------------------------------------------");
+            }
+
+            Console.WriteLine("WITHOUT GROUPING");
+
+            var customersAndSuppliers2 = dataSource.Customers.Select(
+                customer => new
+                {
+                    customer.CustomerID,
+                    customer.City,
+                    customer.Country,
+                    Suppliers = dataSource.Suppliers
+                        .Where(supplier =>
+                            supplier.City.Equals(customer.City, StringComparison.OrdinalIgnoreCase)
+                            && supplier.Country.Equals(customer.Country, StringComparison.OrdinalIgnoreCase))
+                        .Select(supplier => new { supplier.SupplierName, supplier.City, supplier.Country })
+                });
+
+            foreach (var customer in customersAndSuppliers2)
+            {
+                ObjectDumper.Write($"Customer ID: {customer.CustomerID}, City: {customer.City}, Country: {customer.Country}");
+                foreach (var supplier in customer.Suppliers)
+                {
+                    ObjectDumper.Write($"Supplier name: {supplier.SupplierName}, City: {supplier.City}, Country: {supplier.Country}");
+                }
+                Console.WriteLine(@"---------------------------------------------------------");
             }
         }
 
