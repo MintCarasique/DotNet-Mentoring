@@ -211,7 +211,7 @@ namespace SampleQueries
             });
             foreach (var city in cities)
             {
-                ObjectDumper.Write(city, 2);
+                ObjectDumper.Write($"City: {city.City}, Profitability: {Math.Round(city.Profit, 2)}, Intensity: {Math.Round(city.Intensity, 2)}");
             }
             
         }
