@@ -25,43 +25,7 @@ namespace SampleQueries
 
         private DataSource dataSource = new DataSource();
 
-        //[Category("Restriction Operators")]
-        //[Title("Where - Task 1")]
-        //[Description("This sample uses the where clause to find all elements of an array with a value less than 5.")]
-        //public void Linq1()
-        //{
-        //	int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
-
-        //	var lowNums =
-        //		from num in numbers
-        //		where num < 5
-        //		select num;
-
-        //	Console.WriteLine("Numbers < 5:");
-        //	foreach (var x in lowNums)
-        //	{
-        //		Console.WriteLine(x);
-        //	}
-        //}
-
-        //[Category("Restriction Operators")]
-        //[Title("Where - Task 2")]
-        //[Description("This sample return return all presented in market products")]
-
-        //public void Linq2()
-        //{
-        //	var products =
-        //		from p in dataSource.Products
-        //		where p.UnitsInStock > 0
-        //		select p;
-
-        //	foreach (var p in products)
-        //	{
-        //		ObjectDumper.Write(p);
-        //	}
-        //}
-
-        [Category("Restriction Operators")]
+        [Category("Tasks")]
         [Title("Task 1")]
         [Description("List of all customers whose total turnover (the sum of all orders) exceeds a certain value X")]
         public void Linq1()
@@ -77,6 +41,29 @@ namespace SampleQueries
             foreach (var client in clients)
             {
                 ObjectDumper.Write(client);
+            }
+        }
+
+        [Category("Tasks")]
+        [Title("Task 2")]
+        [Description("List of suppliers located in the same country and the same city")]
+        public void Linq2()
+        {
+            var customersAndSuppliers = dataSource.Customers.GroupJoin(
+                dataSource.Suppliers,
+                c => new { c.City, c.Country },
+                s => new { s.City, s.Country },
+                (_customer, _suppliers) => new
+                {
+                    _customer.CustomerID,
+                    _customer.City,
+                    _customer.Country,
+                    Suppliers = _suppliers.Select(_s => new { _s.SupplierName, _s.City, _s.Country })
+                });
+            foreach (var customer in customersAndSuppliers)
+            {
+               ObjectDumper.Write(customer, 2);
+               Console.WriteLine("---------------------------------------------------------");
             }
         }
     }
