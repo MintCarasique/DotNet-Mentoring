@@ -176,6 +176,46 @@ namespace SampleQueries
                 Console.WriteLine(@"------------------------------------");
             }
         }
+
+        [Category("Tasks")]
+        [Title("Task 8")]
+        [Description("Group products into groups of ''cheap'', ''average price'', ''expensive''. Define the boundaries of each group.")]
+        public void Linq8()
+        {
+            decimal cheapBorder = 50, expensiveBorder = 100;
+
+            var productGroups = dataSource.Products
+                .GroupBy(product => product.UnitPrice < cheapBorder ? "Cheap"
+                    : product.UnitPrice < expensiveBorder ? "Average" : "Expensive");
+
+            foreach (var productsGroup in productGroups)
+            {
+                Console.WriteLine($@"{productsGroup.Key} products:");
+                foreach (var product in productsGroup)
+                {
+                    Console.WriteLine($@"Product name: {product.ProductName}, Unit price: {product.UnitPrice}");
+                }
+            }
+        }
+
+        [Category("Tasks")]
+        [Title("Task 9")]
+        [Description("Calculate the average profitability of each city and the average intensity")]
+        public void Linq9()
+        {
+            var cities = dataSource.Customers.GroupBy(c => c.City).Select(cityGroup => new
+            {
+                City = cityGroup.Key,
+                Profit = cityGroup.Average(p => p.Orders.Sum(o => o.Total)),
+                Intensity = cityGroup.Average(o => o.Orders.Length)
+            });
+            foreach (var city in cities)
+            {
+                ObjectDumper.Write(city, 2);
+            }
+            
+        }
+
     }
 }
 
