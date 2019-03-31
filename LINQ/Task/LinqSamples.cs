@@ -106,6 +106,22 @@ namespace SampleQueries
                 Console.WriteLine(@"---------------------------------------------------------");
             }
         }
+
+        [Category("Tasks")]
+        [Title("Task 4")]
+        [Description("List of all customers with indication of the beginning of which month of which year they became clients")]
+        public void Linq4()
+        {
+            var customers = dataSource.Customers.Where(c => c.Orders.Any()).Select(_ => new
+            {
+                _.CustomerID,
+                FirstDate = _.Orders.OrderBy(o => o.OrderDate).Select(d => d.OrderDate).First()
+            });
+            foreach (var customer in customers)
+            {
+                ObjectDumper.Write($"Customer ID: {customer.CustomerID}, First order date: {customer.FirstDate}");
+            }
+        }
     }
 }
 
