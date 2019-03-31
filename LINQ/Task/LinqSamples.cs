@@ -155,6 +155,27 @@ namespace SampleQueries
                 ObjectDumper.Write($"ID: {customer.CustomerID}, Postal: {customer.PostalCode}, Region: {customer.Region}, Phone: {customer.Phone}");
             }
         }
+
+        [Category("Tasks")]
+        [Title("Task 7")]
+        [Description("All products grouped into categories, inside - by stock availability, within the last group, sort by cost.")]
+        public void Linq7()
+        {
+            var products = dataSource.Products.GroupBy(c => c.Category).Select(group => new
+                {
+                    Category = group.Key,
+                    UnitsInStock = group.GroupBy(p => p.UnitsInStock > 0).Select(inGroup => new
+                    {
+                        AreUnitsInStock = inGroup.Key,
+                        Products = inGroup.OrderBy(pr => pr.UnitPrice)
+                    })
+                });
+            foreach (var product in products)
+            {
+                ObjectDumper.Write(product, 3);
+                Console.WriteLine(@"------------------------------------");
+            }
+        }
     }
 }
 
