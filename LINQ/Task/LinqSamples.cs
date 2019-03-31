@@ -122,6 +122,23 @@ namespace SampleQueries
                 ObjectDumper.Write($"Customer ID: {customer.CustomerID}, First order date: {customer.FirstDate}");
             }
         }
+        [Category("Tasks")]
+        [Title("Task 5")]
+        [Description("Task 4 sorted by Year, Month, TotalSum (desc), CustomerID")]
+        public void Linq5()
+        {
+            var customers = dataSource.Customers.Where(c => c.Orders.Any()).Select(_ => new
+            {
+                _.CustomerID,
+                FirstDate = _.Orders.OrderBy(o => o.OrderDate).Select(d => d.OrderDate).First(),
+                TotalSum = _.Orders.Sum(order => order.Total)
+            }).OrderBy(y => y.FirstDate.Year).ThenBy(m => m.FirstDate.Month).ThenByDescending(t => t.TotalSum).ThenBy(id => id.CustomerID);
+            foreach (var customer in customers)
+            {
+                ObjectDumper.Write(
+                    $@"Customer ID: {customer.CustomerID}, Year: {customer.FirstDate.Year}, Month: {customer.FirstDate.Month}, Sum: {customer.TotalSum}");
+            }
+        }
     }
 }
 
