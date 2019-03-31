@@ -216,6 +216,46 @@ namespace SampleQueries
             
         }
 
+        [Category("Tasks")]
+        [Title("Task 10")]
+        [Description("Calculate the average profitability of each city and the average intensity")]
+        public void Linq10()
+        {
+            var customerGroups = dataSource.Customers
+                .Select(customer => new
+                {
+                    customer.CustomerID,
+                    StatForMonths = customer.Orders
+                        .GroupBy(order => order.OrderDate.Month)
+                        .Select(group => new { Month = group.Key, OrdersCount = group.Count() }),
+                    StatForYears = customer.Orders
+                        .GroupBy(order => order.OrderDate.Year)
+                        .Select(group => new { Year = group.Key, OrdersCount = group.Count() }),
+                    StatForMonthsAndYears = customer.Orders
+                        .GroupBy(order => new { order.OrderDate.Year, order.OrderDate.Month })
+                        .Select(group => new { group.Key.Year, group.Key.Month, OrdersCount = group.Count() })
+                });
+
+            foreach (var customer in customerGroups)
+            {
+                Console.WriteLine($@"CustomerID: {customer.CustomerID}");
+                Console.WriteLine(@"	Statistic for months:");
+                foreach (var monthStat in customer.StatForMonths)
+                {
+                    Console.WriteLine($@"		Month: {monthStat.Month}, Orders count: {monthStat.OrdersCount}");
+                }
+                Console.WriteLine(@"	Statistic for years:");
+                foreach (var yearStat in customer.StatForYears)
+                {
+                    Console.WriteLine($@"		Year: {yearStat.Year}, Orders count: {yearStat.OrdersCount}");
+                }
+                Console.WriteLine(@"	Statistic for months and years:");
+                foreach (var monthYearStat in customer.StatForMonthsAndYears)
+                {
+                    Console.WriteLine($@"		Month: {monthYearStat.Month}, Year: {monthYearStat.Year}, Orders count: {monthYearStat.OrdersCount}");
+                }
+            }
+        }
     }
 }
 
