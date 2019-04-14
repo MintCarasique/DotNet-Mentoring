@@ -118,21 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConfigurationSectionWasNotFound" xml:space="preserve">
-    <value />
+    <value>Ошибка. Отсутствует необходимая конфигурация.</value>
   </data>
   <data name="CreatedFileFound" xml:space="preserve">
-    <value />
+    <value>Файл "{0}" был создан "{1}"</value>
   </data>
   <data name="ExitMessage" xml:space="preserve">
-    <value />
+    <value>Для завершения работы приложения нажмите Ctrl + C</value>
   </data>
   <data name="FileTransfered" xml:space="preserve">
-    <value />
+    <value>Файл был успешно перемещен</value>
   </data>
   <data name="FoundMatchingRule" xml:space="preserve">
-    <value />
+    <value>Найдено подходящее правило</value>
   </data>
   <data name="MatchingRuleNotFound" xml:space="preserve">
-    <value />
+    <value>Подходящее правило не найдено</value>
   </data>
 </root>

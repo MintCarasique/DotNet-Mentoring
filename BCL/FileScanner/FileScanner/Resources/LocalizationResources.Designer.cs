@@ -22,7 +22,7 @@ namespace FileScanner.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class LocalizationResources {
+    public class LocalizationResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -61,16 +61,16 @@ namespace FileScanner.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Error. Some configuration is missing.
         /// </summary>
-        internal static string ConfigurationSectionWasNotFound {
+        public static string ConfigurationSectionWasNotFound {
             get {
                 return ResourceManager.GetString("ConfigurationSectionWasNotFound", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to File &quot;{0}&quot; was created on &quot;{1}&quot;.
         /// </summary>
         internal static string CreatedFileFound {
             get {
@@ -79,16 +79,16 @@ namespace FileScanner.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Press Ctrl + C to stop app.
         /// </summary>
-        internal static string ExitMessage {
+        public static string ExitMessage {
             get {
                 return ResourceManager.GetString("ExitMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to File was successfully transfered.
         /// </summary>
         internal static string FileTransfered {
             get {
@@ -97,7 +97,7 @@ namespace FileScanner.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Found matching rule.
         /// </summary>
         internal static string FoundMatchingRule {
             get {
@@ -106,7 +106,7 @@ namespace FileScanner.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Not found matching rule.
         /// </summary>
         internal static string MatchingRuleNotFound {
             get {

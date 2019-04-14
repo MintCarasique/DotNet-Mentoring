@@ -118,21 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConfigurationSectionWasNotFound" xml:space="preserve">
-    <value />
+    <value>Error. Some configuration is missing</value>
   </data>
   <data name="CreatedFileFound" xml:space="preserve">
-    <value />
+    <value>File "{0}" was created on "{1}"</value>
   </data>
   <data name="ExitMessage" xml:space="preserve">
-    <value />
+    <value>Press Ctrl + C to stop app</value>
   </data>
   <data name="FileTransfered" xml:space="preserve">
-    <value />
+    <value>File was successfully transfered</value>
   </data>
   <data name="FoundMatchingRule" xml:space="preserve">
-    <value />
+    <value>Found matching rule</value>
   </data>
   <data name="MatchingRuleNotFound" xml:space="preserve">
-    <value />
+    <value>Not found matching rule</value>
   </data>
 </root>
