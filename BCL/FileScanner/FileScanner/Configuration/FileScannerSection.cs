@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace FileScanner.Configuration
 {
-	public class FileSystemWatcherSection : ConfigurationSection
+	public class FileScannerSection : ConfigurationSection
 	{
 		[ConfigurationProperty("culture", DefaultValue = "en-US")]
 		public CultureInfo Culture => (CultureInfo)this["culture"];

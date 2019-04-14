@@ -44,23 +44,33 @@
   <ItemGroup>
     <Compile Include="Configuration\DirectoriesCollection.cs" />
     <Compile Include="Configuration\Directory.cs" />
-    <Compile Include="Configuration\FileSystemWatcherSection.cs" />
+    <Compile Include="Configuration\FileScannerSection.cs" />
     <Compile Include="Configuration\Rule.cs" />
     <Compile Include="Configuration\RulesCollection.cs" />
     <Compile Include="FileScanner.cs" />
+    <Compile Include="FileScannerHelper.cs" />
     <Compile Include="Interfaces\IConsoleAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\RuLocale.Designer.cs">
+    <Compile Include="Resources\LocalizationResources.ru-RU.Designer.cs">
+      <DependentUpon>LocalizationResources.ru-RU.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RuLocale.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\LocalizationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalizationResources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Resources\RuLocale.resx">
+    <EmbeddedResource Include="Resources\LocalizationResources.ru-RU.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RuLocale.Designer.cs</LastGenOutput>
+      <LastGenOutput>LocalizationResources.ru-RU.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LocalizationResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocalizationResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

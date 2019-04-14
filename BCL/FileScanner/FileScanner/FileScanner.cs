@@ -7,7 +7,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using FileScanner.Interfaces;
+using FileScanner.Configuration;
 using Directory = System.IO.Directory;
+using Rule = FileScanner.Configuration.Rule;
 
 namespace FileScanner
 {
@@ -15,11 +17,13 @@ namespace FileScanner
     {
         private readonly IConsoleAdapter _console;
         private readonly string _defaultDirectory;
+        private readonly FileScannerHelper _helper;
 
-        public FileScanner(IEnumerable<string> directories, IConsoleAdapter console, string defaultDirectory)
+        public FileScanner(IEnumerable<string> directories, IConsoleAdapter console, string defaultDirectory, IEnumerable<Rule> rules)
         {
             _console = console;
             _defaultDirectory = defaultDirectory;
+            _helper = new FileScannerHelper(rules, defaultDirectory, console);
 
             foreach (var directory in directories)
             {
@@ -48,14 +52,10 @@ namespace FileScanner
         {
             var creationDate = File.GetCreationTime(filePath);
             _console?.Write(string.Format(
-                "test",
+                Resources.LocalizationResources.CreatedFileFound,
                 fileName,
                 creationDate.ToShortDateString()));
-        }
-
-        private void MoveFile(string name, string path)
-        {
-
+            _helper.ShiftFile(fileName, filePath);
         }
     }
 }
