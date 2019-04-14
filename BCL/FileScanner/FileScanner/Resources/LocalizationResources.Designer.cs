@@ -22,14 +22,14 @@ namespace FileScanner.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class RuLocale {
+    internal class LocalizationResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal RuLocale() {
+        internal LocalizationResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace FileScanner.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FileScanner.Resources.RuLocale", typeof(RuLocale).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FileScanner.Resources.LocalizationResources", typeof(LocalizationResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,15 @@ namespace FileScanner.Resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ConfigurationSectionWasNotFound {
+            get {
+                return ResourceManager.GetString("ConfigurationSectionWasNotFound", resourceCulture);
             }
         }
         
@@ -84,6 +93,24 @@ namespace FileScanner.Resources {
         internal static string FileTransfered {
             get {
                 return ResourceManager.GetString("FileTransfered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string FoundMatchingRule {
+            get {
+                return ResourceManager.GetString("FoundMatchingRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MatchingRuleNotFound {
+            get {
+                return ResourceManager.GetString("MatchingRuleNotFound", resourceCulture);
             }
         }
     }

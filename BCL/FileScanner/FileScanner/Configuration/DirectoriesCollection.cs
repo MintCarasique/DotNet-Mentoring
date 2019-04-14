@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using FileScanner.Configuration;
 using System.Configuration;
 
-namespace FileSystemWatcherApp.Configuration
+namespace FileScanner.Configuration
 {
 	public class DirectoriesCollection : ConfigurationElementCollection
 	{

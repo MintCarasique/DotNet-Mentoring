@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,6 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\DirectoriesCollection.cs" />
+    <Compile Include="Configuration\Directory.cs" />
+    <Compile Include="Configuration\FileSystemWatcherSection.cs" />
+    <Compile Include="Configuration\Rule.cs" />
+    <Compile Include="Configuration\RulesCollection.cs" />
     <Compile Include="FileScanner.cs" />
     <Compile Include="Interfaces\IConsoleAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

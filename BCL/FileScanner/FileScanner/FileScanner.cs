@@ -46,7 +46,11 @@ namespace FileScanner
 
         private void OnFileCreated(string fileName, string filePath)
         {
-
+            var creationDate = File.GetCreationTime(filePath);
+            _console?.Write(string.Format(
+                "test",
+                fileName,
+                creationDate.ToShortDateString()));
         }
 
         private void MoveFile(string name, string path)
