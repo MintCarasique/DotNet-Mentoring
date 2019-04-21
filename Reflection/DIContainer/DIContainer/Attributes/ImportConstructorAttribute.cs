@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DIContainer.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    class ImportConstructorAttribute : Attribute
+    public class ImportConstructorAttribute : Attribute
     {
     }
 }

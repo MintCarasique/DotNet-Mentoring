@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DIContainer.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    class ExportAttribute : Attribute
+    public class ExportAttribute : Attribute
     {
         public ExportAttribute()
         {

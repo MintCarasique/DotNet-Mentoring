@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using DIContainer.Attributes;
 using DIContainer.Exceptions;
 
 namespace DIContainer
 {
-    public class DIContainer
+    public class DiContainer
     {
         private readonly IDictionary<Type, Type> _registeredTypes;
 
-        public DIContainer()
+        public DiContainer()
         {
             _registeredTypes = new Dictionary<Type, Type>();
         }
@@ -25,7 +23,7 @@ namespace DIContainer
 
         public void AddType(Type type)
         {
-            this.AddType(type, type);
+            AddType(type, type);
         }
 
         public void AddAssembly(Assembly assembly)
@@ -34,33 +32,34 @@ namespace DIContainer
             foreach (Type type in publicTypes)
             {
                 ImportConstructorAttribute importConstructorAttribute = type.GetCustomAttribute<ImportConstructorAttribute>();
-                bool hasImportedProperties = this.GetPropertiesWithImportAttribute(type).Any();
+                bool hasImportedProperties = GetPropertiesWithImportAttribute(type).Any();
                 if (importConstructorAttribute != null && hasImportedProperties)
                 {
                     throw new IoCContainerException("Class cannot contain ImportConstructorAttribute and ImportAttribute at the same time");
                 }
-                else if (importConstructorAttribute != null ^ hasImportedProperties)
+
+                if (importConstructorAttribute != null ^ hasImportedProperties)
                 {
-                    this.AddType(type);
+                    AddType(type);
                     continue;
                 }
 
                 IEnumerable<ExportAttribute> exportAttributes = type.GetCustomAttributes<ExportAttribute>();
                 foreach (ExportAttribute exportAttribute in exportAttributes)
                 {
-                    this.AddType(type, exportAttribute.BaseType ?? type);
+                    AddType(type, exportAttribute.BaseType ?? type);
                 }
             }
         }
 
         public object CreateInstance(Type type)
         {
-            return this.BuildInstance(type);
+            return BuildInstance(type);
         }
 
         public T CreateInstance<T>()
         {
-            return (T)this.CreateInstance(typeof(T));
+            return (T)CreateInstance(typeof(T));
         }
 
         private object BuildInstance(Type keyType)
@@ -71,24 +70,24 @@ namespace DIContainer
             }
 
             Type type = _registeredTypes[keyType];
-            ConstructorInfo constructorInfo = this.GetConstructorInfo(type);
-            object instance = this.BuildInstance(type, constructorInfo);
+            ConstructorInfo constructorInfo = GetConstructorInfo(type);
+            object instance = BuildInstance(type, constructorInfo);
 
             if (type.GetCustomAttribute<ImportConstructorAttribute>() != null)
             {
                 return instance;
             }
 
-            this.InstantiateProperties(type, instance);
+            InstantiateProperties(type, instance);
             return instance;
         }
 
         private void InstantiateProperties(Type type, object instance)
         {
-            IEnumerable<PropertyInfo> propertiesInfo = this.GetPropertiesWithImportAttribute(type);
+            IEnumerable<PropertyInfo> propertiesInfo = GetPropertiesWithImportAttribute(type);
             foreach (PropertyInfo propertyInfo in propertiesInfo)
             {
-                object instantiatedProperty = this.BuildInstance(propertyInfo.PropertyType);
+                object instantiatedProperty = BuildInstance(propertyInfo.PropertyType);
                 propertyInfo.SetValue(instance, instantiatedProperty);
             }
         }
@@ -98,7 +97,7 @@ namespace DIContainer
             List<object> parametersInstances = new List<object>();
             foreach (ParameterInfo constructorParameter in constructorInfo.GetParameters())
             {
-                object parameterInstance = this.BuildInstance(constructorParameter.ParameterType);
+                object parameterInstance = BuildInstance(constructorParameter.ParameterType);
                 parametersInstances.Add(parameterInstance);
             }
 
