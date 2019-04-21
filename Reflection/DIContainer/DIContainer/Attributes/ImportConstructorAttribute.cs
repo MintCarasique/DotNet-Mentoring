@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DIContainer
+namespace DIContainer.Attributes
 {
-    public class DIContainer
+    [AttributeUsage(AttributeTargets.Class)]
+    class ImportConstructorAttribute : Attribute
     {
     }
 }
