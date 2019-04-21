@@ -45,6 +45,7 @@
     <Compile Include="Attributes\ImportAttribute.cs" />
     <Compile Include="Attributes\ImportConstructorAttribute.cs" />
     <Compile Include="DIContainer.cs" />
+    <Compile Include="Exceptions\IocContainerException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
