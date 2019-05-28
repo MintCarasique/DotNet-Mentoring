@@ -340,7 +340,6 @@ namespace MvcMusicStore.Controllers
             AuthenticationManager.SignOut();
 
 			_counterHelper.Increment(Counters.SuccessLogOutCounter);
-
 			_logger.Debug($"User was logged off");
 
 			return RedirectToAction("Index", "Home");
